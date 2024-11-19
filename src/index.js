@@ -34,7 +34,7 @@ function setupScene({ scene, camera}) {
     // Load speaker model first
     gltfLoader.load('assets/models/speaker.glb', (gltf) => {
         const speaker = gltf.scene;
-        speaker.scale.set(25, 25, 25);
+        speaker.scale.set(0.25, 0.25, 0.25);
         
         // Create positional audio and attach it to the speaker mesh
         const speakerMesh = speaker.children[0];
