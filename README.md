@@ -1,72 +1,88 @@
-# Spatial Audio VR Experience
+# LabVerse - Cave Labs at PES University RR Campus
 
-A WebXR-based virtual reality experience featuring spatial audio implementation using Three.js. The project creates an immersive environment where users can experience positional audio in a stylized room setting.
+**LabVerse** is an immersive virtual reality experience that brings the Cave Labs of PES University RR Campus to life. Using cutting-edge technologies like WebXR and Three.js, LabVerse provides a detailed exploration of the environment.
 
-## 🎯 Features
+---
 
-- Immersive VR environment with a stylized room
-- Spatial audio implementation using Three.js PositionalAudio
-- Custom 3D speaker model with audio source
-- VR controller support with Meta Quest 3 compatibility
-- Desktop fallback with OrbitControls
-- Dynamic text rendering using Troika
-- Environment mapping for realistic lighting
+## 🎯 **Features**
+- **Immersive VR Experience**: Dive into a fully interactive and realistic virtual laboratory environment using WebXR.
+- **Room Exploration**: Experience the Cave Labs at PES University RR Campus with detailed 3D models and physics-based interactions.
+- **Controller Support**: Fully integrated VR controllers for navigation and interaction.
+- **Cross-Platform Compatibility**: Works with both native WebXR-supported devices and fallback options using iwer's XRDevice.
+- **Dynamic Lighting and Environments**: Enhanced visuals using RoomEnvironment for realistic reflections and lighting.
 
-## 🚀 Getting Started
+---
 
+## **Technologies Used**
+- **Three.js**: 3D rendering engine for creating and rendering the scene.
+- **WebXR**: Enables immersive VR experiences directly in the browser.
+- **iwer**: Provides fallback support for devices without native WebXR.
+- **Gamepad Wrapper**: Simplifies controller input handling.
+- **Three.js Add-ons**: Includes VRButton, OrbitControls, RoomEnvironment, and XRControllerModelFactory for extended functionality.
+
+---
+
+## 🚀 **Getting Started**
 ### Prerequisites
+To get started with LabVerse, ensure you have the following installed:
+- **Node.js** (v16 or higher recommended)
+- A compatible **WebXR device** (e.g., Meta Quest 3) or a fallback setup using iwer's XRDevice.
+- A modern browser with WebXR support (e.g., Chrome, Edge).
 
-- A modern web browser with WebXR support
-- A VR headset (optional, Meta Quest 3 recommended)
-- Node.js and npm installed on your development machine
+---
+## **Setup**
+To set up LabVerse on your local system, follow these steps:
 
-### Installation
+1. **Clone the Repository**:  
+   Clone the LabVerse repository to your local machine using Git:  
+   ```bash
+   git clone https://github.com/poornapragnyah/LabVerse.git
+   ```
+2. **Navigate to the project directory**:
+   ```bash
+   cd LabVerse
+   ```
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+4. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd spatial-audio-project
-```
+---
 
-2. Install dependencies:
-```bash
-npm install
-```
-
-### Required Dependencies
-
-- three.js
-- troika-three-text
-- iwer (for VR device emulation)
-- gamepad-wrapper
-
-## 📁 Project Structure
-
-```
-├── assets/
-│   ├── models/
-│   │   ├── stylised_room.glb
-│   │   └── speaker.glb
-│   ├── audio1.ogg
-│   └── SpaceMono-Bold.ttf
-├── src/
-│   ├── index.js
-│   └── init.js
-```
-
-## 🎮 Usage
-
+## 🎮 **Usage**
 ### VR Mode
-1. Launch the application on a WebXR-compatible browser
-2. Click the "Enter VR" button
-3. Explore the space to experience the spatial audio effects
-4. Use VR controllers to interact with the environment
+1. **Launch the Application**:
+    - In your headset, open the browser and navigate to the IP address on which the app is running, as shown in the terminal. Ensure both the headset and the server are on the same network if you are accessing it after cloning the repo.
+2. **Enter VR**:
+   - Click on the "Enter VR" button to start the immersive experience.
 
 ### Desktop Mode
 - Use mouse to orbit around the scene
 - Left click + drag to rotate
 - Right click + drag to pan
 - Scroll to zoom
+
+---
+
+## 🛠️ Technical Details
+
+### Scene Setup
+- Custom environment mapping using RoomEnvironment
+- Dynamic text rendering with Troika
+- Automatic window resize handling
+- VR controller model loading and setup
+
+### VR Support
+- Native WebXR support detection
+- Fallback to iwer emulation for development
+- Meta Quest 3 controller mapping
+- Gamepad API integration
+
+---
 
 ## 🔊 Audio Implementation
 
@@ -83,30 +99,8 @@ speakerSound.setRolloffFactor(1);
 speakerSound.setDistanceModel('inverse');
 ```
 
-## 🛠️ Technical Details
+---
 
-### Scene Setup
-- Custom environment mapping using RoomEnvironment
-- Dynamic text rendering with Troika
-- Automatic window resize handling
-- VR controller model loading and setup
+## **Acknowledgments**
+We would like to express our sincere gratitude to Dr. Adithya Balasubramanyam, the instructor of the Augmented Reality and Virtual Reality course at PES University, for providing us with access to Cave Labs and for his support throughout this project.
 
-### VR Support
-- Native WebXR support detection
-- Fallback to iwer emulation for development
-- Meta Quest 3 controller mapping
-- Gamepad API integration
-
-## 📝 License
-
-This project includes code licensed under the MIT license. See the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## ✨ Acknowledgments
-
-- Three.js team for the WebXR implementation
-- Meta Quest for VR device support
-- Contributors to the iwer and gamepad-wrapper libraries
