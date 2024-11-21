@@ -39,4 +39,8 @@ module.exports = {
 		}),
 	],
 	devtool: 'source-map',
+	output: {
+		path: path.resolve(__dirname, 'public'),  // Output to 'public' directory
+		filename: 'bundle.js',
+	  },
 };
