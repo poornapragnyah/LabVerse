@@ -54,7 +54,7 @@ function setupScene({ scene, camera }) {
 
         // Load the audio file and configure the positional audio
         const audioLoader = new THREE.AudioLoader();
-        audioLoader.load('assets/audio1.ogg', (buffer) => {
+        audioLoader.load('/audio1.ogg', (buffer) => {
             speakerSound.setBuffer(buffer); // Set the audio buffer
             speakerSound.setRefDistance(0.3); // Set the reference distance for volume adjustment
             speakerSound.setRolloffFactor(1); // Set the rolloff factor for volume attenuation
