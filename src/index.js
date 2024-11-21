@@ -28,7 +28,7 @@ function setupScene({ scene, camera }) {
     //     gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
     // });
 
-    gltfLoader.load('assets/models/arvrcavelabs.glb', (gltf) => {
+    gltfLoader.load('assets/models/stylised_room.glb', (gltf) => {
         scene.add(gltf.scene); // Add the room model to the scene
         gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
     });
