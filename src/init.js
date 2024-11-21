@@ -6,13 +6,13 @@
 
 import * as THREE from 'three';
 import { XRDevice, metaQuest3 } from 'iwer';
+import { audioListener, speakerSound } from './index.js';
 import { DevUI } from '@iwer/devui';
 import { GamepadWrapper } from 'gamepad-wrapper';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { VRButton } from 'three/addons/webxr/VRButton.js';
 import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
-import { audioListener, speakerSound } from './index.js';
 
 /**
  * Initializes a WebXR 3D scene.
