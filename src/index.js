@@ -61,9 +61,6 @@ function setupScene({ scene, camera }) {
             speakerSound.setDistanceModel('inverse'); // Use the inverse distance model for spatial audio
             speakerSound.setLoop(true); // Enable looping of the audio
             speakerSound.setVolume(1); // Set the initial volume level
-            
-            // Play the audio only after it is fully loaded
-            speakerSound.play();
         });
 
         // Add the positional audio to the speaker mesh
@@ -82,6 +79,6 @@ function setupScene({ scene, camera }) {
         getSpeakerSound: () => speakerSound // Function to get the positional audio object
     };
 }
-
+export { audioListener, speakerSound };
 // Call the initialization function with the setupScene function
 init(setupScene);

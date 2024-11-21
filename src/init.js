@@ -12,6 +12,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { VRButton } from 'three/addons/webxr/VRButton.js';
 import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
+import { audioListener, speakerSound } from './index.js';
 
 /**
  * Initializes a WebXR 3D scene.
@@ -94,6 +95,21 @@ export async function init(setupScene = () => {}, onFrame = () => {}) {
     const player = new THREE.Group();
     scene.add(player);
     player.add(camera); // Add camera to the player group
+
+    renderer.xr.addEventListener('sessionstart', () => {
+        // Resume the AudioContext if it’s suspended
+        if (audioListener.context.state === 'suspended') {
+            audioListener.context.resume().then(() => {
+                console.log('AudioContext resumed');
+            });
+        }
+
+        // Ensure the speaker sound plays once the session starts
+        if (speakerSound && !speakerSound.isPlaying) {
+            speakerSound.play();
+            console.log('Speaker sound started');
+        }
+    });
 
     // Set up VR controllers using XRControllerModelFactory
     const controllerModelFactory = new XRControllerModelFactory();
