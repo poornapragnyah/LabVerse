@@ -8,6 +8,9 @@ import * as THREE from 'three'; // Import the main THREE.js library
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'; // Import the GLTF loader for 3D models
 import { init } from './init.js'; // Import the initialization function for setting up the scene
 
+//URL for the 3D model hosted on Google Drive
+const modelUrl = 'https://drive.google.com/uc?id=1eIRc74GLypquoD65IGIMUjQ27zkvxRx2'
+
 // Variables to hold the positional audio object and audio listener
 let speakerSound, audioListener;
 
@@ -28,7 +31,7 @@ function setupScene({ scene, camera }) {
     //     gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
     // });
 
-    gltfLoader.load('/models/stylised_room.glb', (gltf) => {
+    gltfLoader.load(modelUrl, (gltf) => {
         scene.add(gltf.scene); // Add the room model to the scene
         gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
     });
