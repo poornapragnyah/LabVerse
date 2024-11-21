@@ -9,7 +9,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'; // Import the G
 import { init } from './init.js'; // Import the initialization function for setting up the scene
 
 //URL for the 3D model hosted on Google Drive
-const modelUrl = 'https://drive.google.com/uc?id=1eIRc74GLypquoD65IGIMUjQ27zkvxRx2'
+// const modelUrl = 'https://drive.google.com/uc?id=1eIRc74GLypquoD65IGIMUjQ27zkvxRx2'
 
 // Variables to hold the positional audio object and audio listener
 let speakerSound, audioListener;
@@ -31,9 +31,15 @@ function setupScene({ scene, camera }) {
     //     gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
     // });
 
-    gltfLoader.load(modelUrl, (gltf) => {
-        scene.add(gltf.scene); // Add the room model to the scene
-        gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
+    // gltfLoader.load(modelUrl, (gltf) => {
+    //     scene.add(gltf.scene); // Add the room model to the scene
+    //     gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
+    // });
+
+    // Load Secondary model 
+    gltfLoader.load('/models/stylised_room.glb', (gltf) => {
+        scene.add(gltf.scene);
+        gltf.scene.scale.set(1, 1, 1);
     });
 
     // Set up the audio listener and attach it to the camera
@@ -42,7 +48,8 @@ function setupScene({ scene, camera }) {
 
     // Create a group to hold the speaker model and its audio
     const speakerGroup = new THREE.Group();
-    speakerGroup.position.set(-8, 1.8, 1.2); // Set the position of the speaker group
+    speakerGroup.position.set(-2.4, 2.0, -1.5);
+    // speakerGroup.position.set(-8, 1.8, 1.2); // Set the position of the speaker group
 
     // Load the speaker model
     gltfLoader.load('/models/speaker.glb', (gltf) => {
