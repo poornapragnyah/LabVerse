@@ -28,7 +28,7 @@ function setupScene({ scene, camera }) {
     //     gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
     // });
 
-    gltfLoader.load('assets/models/stylised_room.glb', (gltf) => {
+    gltfLoader.load('/models/stylised_room.glb', (gltf) => {
         scene.add(gltf.scene); // Add the room model to the scene
         gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
     });
@@ -42,7 +42,7 @@ function setupScene({ scene, camera }) {
     speakerGroup.position.set(-8, 1.8, 1.2); // Set the position of the speaker group
 
     // Load the speaker model
-    gltfLoader.load('assets/models/speaker.glb', (gltf) => {
+    gltfLoader.load('/models/speaker.glb', (gltf) => {
         const speaker = gltf.scene; // Get the speaker model from the loaded GLTF
         speaker.scale.set(0.25, 0.25, 0.25); // Scale the speaker model
 

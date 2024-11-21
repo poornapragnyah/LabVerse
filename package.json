@@ -14,7 +14,7 @@
 		"webpack-dev-server": "5.1.0"
 	},
 	"scripts": {
-		"build": "webpack",
+		"build": "node ./node_modules/webpack/bin/webpack.js",
 		"dev": "webpack serve",
 		"format": "prettier --write ./src/**/*"
 	},
