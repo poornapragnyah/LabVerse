@@ -8,11 +8,29 @@ import * as THREE from 'three'; // Import the main THREE.js library
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'; // Import the GLTF loader for 3D models
 import { init } from './init.js'; // Import the initialization function for setting up the scene
 
+const modelUrl = 'https://gateway.pinata.cloud/ipfs/QmTgQrjPQxd9u92QweU56mqhdJRsTcWdAv5gwJsQeWw6xP';
+
 //URL for the 3D model hosted on Google Drive
-// const modelUrl = 'https://drive.google.com/uc?id=1eIRc74GLypquoD65IGIMUjQ27zkvxRx2'
+//const modelUrl = 'https://drive.google.com/uc?id=1eIRc74GLypquoD65IGIMUjQ27zkvxRx2'
 
 // Variables to hold the positional audio object and audio listener
 let speakerSound, audioListener;
+// Add the modal logic
+const modal = document.getElementById('progress-modal');
+const closeButton = document.getElementById('close-button');
+
+// Handle closing the initial modal
+closeButton.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modal.style.display = 'flex';
+  modal.innerHTML = `<p>Loading model, please wait...</p>
+                     <div id="progress-container">
+                       <progress value="0" max="100" id="progress-bar"></progress>
+                     </div>`;
+  closeButton.style.display = 'none';
+  document.getElementById('modal-background').style.display = 'block';
+  modal.style.display = 'block';
+});
 
 /**
  * Sets up the 3D scene including models, spatial audio, and the score display.
@@ -31,16 +49,30 @@ function setupScene({ scene, camera }) {
     //     gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
     // });
 
-    // gltfLoader.load(modelUrl, (gltf) => {
-    //     scene.add(gltf.scene); // Add the room model to the scene
-    //     gltf.scene.scale.set(1, 1, 1); // Set the scale of the room
-    // });
+    gltfLoader.load(modelUrl, (gltf) => {
+        scene.add(gltf.scene); // Add the room model to the scene
+        gltf.scene.scale.set(1, 1, 1);
+        modal.style.display = 'none'; 
+        document.getElementById('modal-background').style.display = 'none';// Hide modal once model is loaded
+    },
+    (xhr) => {
+      // Update the progress bar
+      const progressBar = document.getElementById('progress-bar');
+      if (progressBar) {
+        progressBar.value = (xhr.loaded / xhr.total) * 100;
+      }
+    },
+    (error) => {
+      console.error('Error loading the model', error);
+      modal.innerHTML = '<p>Failed to load the model. Please try again later.</p>';
+    } // Set the scale of the room
+);
 
     // Load Secondary model 
-    gltfLoader.load('/models/stylised_room.glb', (gltf) => {
-        scene.add(gltf.scene);
-        gltf.scene.scale.set(1, 1, 1);
-    });
+    // gltfLoader.load('assets/models/stylised_room.glb', (gltf) => {
+    //     scene.add(gltf.scene);
+    //     gltf.scene.scale.set(1, 1, 1);
+    // });
 
     // Set up the audio listener and attach it to the camera
     audioListener = new THREE.AudioListener();
@@ -48,8 +80,8 @@ function setupScene({ scene, camera }) {
 
     // Create a group to hold the speaker model and its audio
     const speakerGroup = new THREE.Group();
-    speakerGroup.position.set(-2.4, 2.0, -1.5);
-    // speakerGroup.position.set(-8, 1.8, 1.2); // Set the position of the speaker group
+    // speakerGroup.position.set(-2.4, 2.0, -1.5);
+    speakerGroup.position.set(-8, 1.8, 1.2); // Set the position of the speaker group
 
     // Load the speaker model
     gltfLoader.load('/models/speaker.glb', (gltf) => {

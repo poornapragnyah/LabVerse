@@ -1,28 +1,207 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<title>LabVerse</title>
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0, user-scalable=no"
-		/>
-	</head>
-	<body style="margin: 0">
-		<div
-			style="
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>LabVerse</title>
+    <style>
+
+		body {
+		margin: 0;
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start; /* Aligns the content to the top */
+		background-color: #1e1e1e;
+		color: white;
+		height: 100vh;
+		overflow: hidden;
+		}
+		#modal, #info-modal {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			padding: 20px;
+			background: #333;
+			border: 1px solid white;
+			border-radius: 10px;
+			z-index: 20;
+			display: none;
+			text-align: center;
+			}
+		
+			#info-modal {
+				z-index: 10;
+			}
+			#modal{
+				z-index: 2;
+			}
+
+			#progress-modal{
 				position: fixed;
-				top: 10px;
-				width: 100vw;
-				display: flex;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				padding: 20px;
+				background: #333;
+				border: 1px solid white;
+				border-radius: 10px;
+				z-index: 20;
+				display: none;
+				text-align: center;
 				flex-direction: column;
 				justify-content: center;
-				align-items: center;
-				color: white;
-			"
-		>
-			<h1>LabVerse</h1>
-		</div>
-		<script type="module" src="./index.js"></script>
-	</body>
+				z-index: 30;
+			}
+		#modal-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.7); /* Darkens the background */
+		z-index: 10;
+		display: none;
+		}
+
+		.hidden { 
+		display: none; 
+		}
+
+		#progress-container {
+		margin-top: 20px;
+		}
+
+      /* Button styles */
+      #close-button, #start-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #close-button:hover, #start-button:hover {
+        background-color: #45a049;
+      }
+
+      /* Progress container styling */
+      #progress-container {
+        margin-top: 20px;
+      }
+
+      /* Hidden class for hiding elements */
+      .hidden { display: none; }
+
+      /* Canvas styling to ensure it doesn't interfere with modal */
+      canvas {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;  /* Places the canvas behind other content */; /* Sets the background color of the canvas */
+      }
+
+      /* Fade-in animation for modal */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+	  h1 {
+		font-size: 3em;
+		color: #fff;
+		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+		transition: transform 0.3s ease-in-out;
+		margin-top: 20px;
+		padding: 20px;
+		background-color: #333; /* Add a background color to the header */
+		border-radius: 5px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Adds a shadow effect to the header */
+		}
+
+      h1:hover {
+        transform: scale(1.05);
+      }
+	  .github-link {
+		color: #45a049;
+		text-decoration: none;
+		font-size: 18px;
+		font-weight: 600;
+		display: inline-block;
+		align-items: center;
+	}
+
+  .github-link:hover {
+	color: #4CAF50;
+  }
+
+  .github-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+    </style>
+  </head>
+  <body>
+    <h1>LabVerse</h1>
+    <div id="info-modal">
+		<h2>Welcome to LabVerse!</h2>
+		<p><strong>LabVerse</strong> is an immersive virtual reality experience that brings the Cave Labs of PES University RR Campus to life. Using cutting-edge technologies like WebXR and Three.js, LabVerse provides a detailed exploration of the environment.</p>
+		<p><strong>Features</strong> include room exploration, dynamic lighting, spatial audio, and cross-platform compatibility.</p>
+		<p><strong>Technologies used:</strong> Three.js, WebXR, iwer, and more.</p>
+		<p style="background-color: aliceblue; border-radius: 10px; border: none; padding: 10px;">
+			<a href="https://github.com/poornapragnyah/LabVerse" target="_blank" class="github-link">
+			  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/1024px-Octicons-mark-github.svg.png" alt="GitHub" class="github-icon">
+			  View on GitHub
+			</a>
+		  </p>
+		<button id="start-button">Start Exploring</button>
+	  </div>
+
+	  <div id="modal" style="display: none;">
+		<p>Note: To use this app without VR, please open it in a browser like Brave.</p>
+		<p>Since the model is large, it might take 60–90 seconds to load completely.</p>
+		<p>Only click "Enter VR" after the model has finished loading. You can track the loading progress after closing this modal.</p>
+		<button id="close-button">Close</button>
+	  </div>
+	  <div id="progress-modal" class="hidden"></div>
+	<div id="modal-background" class="hidden"></div>
+    <canvas id="three-canvas"></canvas>
+	<script type="module">
+		// Hide VR button initially
+		const enterVrButton = document.getElementById('VRButton');
+		const infoModal = document.getElementById('info-modal');
+		const loadingModal = document.getElementById('modal');
+		const closeButton = document.getElementById('close-button');
+		const startButton = document.getElementById('start-button');
+  
+		// Show the Info Modal at the start
+		infoModal.style.display = 'block';
+  
+		// Handle start button click (hide info modal and show loading modal)
+		startButton.addEventListener('click', () => {
+		  infoModal.style.display = 'none';
+		  loadingModal.style.display = 'block';
+		});
+		
+		
+		// Close loading modal and show progress
+		closeButton.addEventListener('click', () => {
+			loadingModal.style.display = 'none';
+			document.getElementById('modal-background').style.display = 'block';
+		});
+	  </script>
+    <script type="module" src="./index.js"></script>
+  </body>
 </html>
