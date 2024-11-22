@@ -16,14 +16,13 @@ const modelUrl = 'https://gateway.pinata.cloud/ipfs/QmTgQrjPQxd9u92QweU56mqhdJRs
 // Variables to hold the positional audio object and audio listener
 let speakerSound, audioListener;
 // Add the modal logic
-const modal = document.getElementById('modal');
+const modal = document.getElementById('progress-modal');
 const closeButton = document.getElementById('close-button');
-
-// Show the initial modal
-modal.style.display = 'block';
 
 // Handle closing the initial modal
 closeButton.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modal.style.display = 'flex';
   modal.innerHTML = `<p>Loading model, please wait...</p>
                      <div id="progress-container">
                        <progress value="0" max="100" id="progress-bar"></progress>
