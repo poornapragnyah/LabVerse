@@ -72,7 +72,6 @@ To set up LabVerse on your local system, follow these steps:
 
 ### Scene Setup
 - Custom environment mapping using RoomEnvironment
-- Dynamic text rendering with Troika
 - Automatic window resize handling
 - VR controller model loading and setup
 
